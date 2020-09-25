@@ -12,8 +12,4 @@ def problem(n=100):
 if __name__ == "__main__":
     wert = problem()
     print (wert)
-
-#for zahl in range (287982374983,287982400083):
-#    wert = problem(zahl)
-#    print (wert)
-#print ("Done")
+    print (wert)
