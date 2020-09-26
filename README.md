@@ -1,4 +1,4 @@
-# 3n-1-problem calculator
+# Collatz-conjecture calculator
 
 Start with any positive integer n.
 Then each term is obtained from the previous term as follows:
