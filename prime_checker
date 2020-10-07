@@ -1,0 +1,38 @@
+# prime number checker
+from math import ceil
+
+
+def get_number():
+    while True:
+        z = input("Enter a number you would like to check for prime:")
+        try:
+            z = int(z)
+            return z
+        except ValueError:
+            print("This is not a valid input for a natural number")
+
+
+def round_number(k):
+    k = k ** (1 / 2)
+    k = ceil(k)
+    return k
+
+
+def check_for_prime(y):
+    for i in range(2, r):
+        if y % i == 0:
+            return False  
+        elif i == r - 1:
+            return True
+        else:
+            continue
+
+
+n = get_number()
+r = round_number(n)
+f = check_for_prime(n)
+
+if f:
+    print("This number is prime! ")
+else:
+    print("This number is not prime")
