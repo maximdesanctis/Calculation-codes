@@ -31,7 +31,7 @@ def check_for_prime(y):
 number = get_number()
 root = round_number(number)
 
-if __name__ == "main":
+if __name__ == "__main__":
     if check_for_prime(number):
         print("This number is prime! ")
     else:
