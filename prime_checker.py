@@ -1,6 +1,4 @@
 # prime number checker
-from math import ceil
-
 
 def get_number():
     while True:
@@ -12,27 +10,28 @@ def get_number():
             print("This is not a valid input for a natural number")
 
 
-def round_number(rounded):
-    rounded = rounded ** (1 / 2)
-    rounded = ceil(rounded)
-    return rounded
-
-
-def check_for_prime(y):
-    for i in range(2, root):
-        if y % i == 0:
-            return False
-        elif i == root - 1:
-            return True
+def check_for_prime(num, bool_value):
+    divisors = []
+    for i in range(2, num):
+        if num % i == 0:
+            divisors.append(i)
+        elif i == num - 1:
+            if not divisors:
+                return True
+            else:
+                if bool_value:
+                    return divisors
+                else:
+                    return False
         else:
             continue
 
 
 number = get_number()
-root = round_number(number)
 
 if __name__ == "__main__":
-    if check_for_prime(number):
+    if check_for_prime(number, False):
         print("This number is prime! ")
     else:
         print("This number is not prime")
+        print("It is divisible by: ", check_for_prime(number, True))
