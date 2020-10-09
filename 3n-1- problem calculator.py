@@ -11,5 +11,5 @@ def problem(n=100):
         return problem(3 * n + 1)
 
     
-if "__name__" == "__main__":
+if __name__ == "__main__":
     print(problem(int(input("Enter number.."))))
