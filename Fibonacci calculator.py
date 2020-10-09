@@ -9,5 +9,5 @@ def fibonacci(n):
 
 
 n = int(input("Enter the number of the position of the fibonacci number you want to calculate..")) 
-if "name" == "__main__":
+if __name__ == "__main__":
     print("The number is " + str(fibonacci(n)) + " when you start with 1.")
