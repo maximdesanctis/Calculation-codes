@@ -11,6 +11,7 @@ def get_number():
         except ValueError:
             print("This is not a valid input for a natural number")
 
+
 def prime_check(check_num):
     if check_num < 2:
         return False
@@ -19,6 +20,7 @@ def prime_check(check_num):
             continue
         return False
     return True
+
 
 if __name__ == "__main__":
     if prime_check(get_number):
