@@ -11,28 +11,17 @@ def get_number():
         except ValueError:
             print("This is not a valid input for a natural number")
 
-
-def round_number(num):
-    root = num ** (1/2)
-    rounded = ceil(root)
-    return rounded
-
-
-def check_for_prime(num, root):
-    for i in range(2, root):
-        if num % i == 0:
-            return False
-        elif i == root - 1:
-            return True
-        else:
+def prime_check(check_num):
+    if check_num < 2:
+        return False
+    for pot_div in range(2, int(pow(check_num, 1 / 2))):
+        if check_num % pot_div != 0:
             continue
-
-
-number = get_number()
-rounded_number = round_number(number)
+        return False
+    return True
 
 if __name__ == "__main__":
-    if check_for_prime(number, rounded_number):
+    if prime_check(get_number):
         print("This number is prime! ")
     else:
         print("This number is not prime")
