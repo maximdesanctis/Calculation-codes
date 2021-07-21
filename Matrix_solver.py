@@ -42,6 +42,15 @@ def eliminate(solve_matrix, matrix_lines, matrix_columns):
         reference_line = solve_matrix[column]
         reference_value = solve_matrix[column][column]
         counter = 0
+        i = -column
+        while reference_value == 0:
+            reference_value = solve_matrix[column][column]
+            cache_one = solve_matrix[column]
+            cache_two = solve_matrix[column + i]
+            solve_matrix[column + i] = cache_one
+            solve_matrix[column] = cache_two
+            solve_matrix[column + i] = solve_matrix[column]
+            i += 1
         for lin_position in range(matrix_lines):
             line = solve_matrix[lin_position]
             if line == solve_matrix[column]:
@@ -49,13 +58,6 @@ def eliminate(solve_matrix, matrix_lines, matrix_columns):
                 continue
             if counter == 0:
                 continue
-            if solve_matrix[column][column] == 0:
-                cache_one = solve_matrix[column]
-                cache_two = solve_matrix[column + 1]
-                solve_matrix[column + 1] = cache_one
-                solve_matrix[column] = cache_two
-
-                solve_matrix[column + 1] = solve_matrix[column]
             reference_ratio = line[column] / reference_value
             for col_position in range(matrix_columns):
                 line[col_position] -= reference_ratio * reference_line[col_position]
@@ -138,10 +140,11 @@ def beta_solution_check(unsolved_matrx, solved_matrx):
 
 def rref(matrix, matrix_lines, matrix_columns):
     finished_matrix = clean(substitute(simplify(eliminate(matrix, matrix_lines, matrix_columns),
-                                                          matrix_lines), matrix_lines, matrix_columns))
+                                                matrix_lines), matrix_lines, matrix_columns))
     if solution_check(finished_matrix):
         return np.matrix(finished_matrix)
     else:
+        print(finished_matrix)
         rref(finished_matrix, matrix_lines, matrix_columns)
 
 
@@ -149,7 +152,7 @@ if __name__ == '__main__':
     lines = get_lines()
     columns = get_columns()
     input_matrix = get_matrix(lines, columns)
-    print('Input matrix: \n', input_matrix)
+    print('Input matrix: \n', np.matrix(input_matrix))
 
     solved_matrix = rref(input_matrix, lines, columns)
     print('Solved: \n', solved_matrix)
