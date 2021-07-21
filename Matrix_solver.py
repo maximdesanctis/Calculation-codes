@@ -50,7 +50,12 @@ def eliminate(solve_matrix, matrix_lines, matrix_columns):
             if counter == 0:
                 continue
             if solve_matrix[column][column] == 0:
-                solve_matrix[column] = solve_matrix[column + 1], solve_matrix[column + 1] = solve_matrix[column]
+                cache_one = solve_matrix[column]
+                cache_two = solve_matrix[column + 1]
+                solve_matrix[column + 1] = cache_one
+                solve_matrix[column] = cache_two
+
+                solve_matrix[column + 1] = solve_matrix[column]
             reference_ratio = line[column] / reference_value
             for col_position in range(matrix_columns):
                 line[col_position] -= reference_ratio * reference_line[col_position]
@@ -103,7 +108,15 @@ def substitute(matrix_matrix, matrix_lines, matrix_columns):
     return matrix_matrix
 
 
-def solution_check(unsolved_matrx, solved_matrx):
+def solution_check(matrix_matrix):
+    for line in range(len(matrix_matrix)):
+        for column in range(len(matrix_matrix[line]) - 1):
+            if matrix_matrix[line][column] != 0 and line != column:
+                return False
+    return True
+
+
+def beta_solution_check(unsolved_matrx, solved_matrx):
     def solved_value(matrix_matrix, column):
         matrix_lines = len(matrix_matrix)
         for line in range(matrix_lines):
@@ -124,13 +137,15 @@ def solution_check(unsolved_matrx, solved_matrx):
 
 
 def rref(matrix, matrix_lines, matrix_columns):
-    finished_matrix = np.matrix(clean(substitute(simplify(eliminate(matrix, matrix_lines, matrix_columns),
-                                                          matrix_lines), matrix_lines, matrix_columns)))
-    return finished_matrix
+    finished_matrix = clean(substitute(simplify(eliminate(matrix, matrix_lines, matrix_columns),
+                                                          matrix_lines), matrix_lines, matrix_columns))
+    if solution_check(finished_matrix):
+        return np.matrix(finished_matrix)
+    else:
+        rref(finished_matrix, matrix_lines, matrix_columns)
 
 
 if __name__ == '__main__':
-
     lines = get_lines()
     columns = get_columns()
     input_matrix = get_matrix(lines, columns)
@@ -138,8 +153,3 @@ if __name__ == '__main__':
 
     solved_matrix = rref(input_matrix, lines, columns)
     print('Solved: \n', solved_matrix)
-
-    if solution_check(input_matrix, finished_matrix):  # This feature doesn't work
-        print('It seems to be correct!')
-    else:
-        print('It seems to be incorrect.. ')
