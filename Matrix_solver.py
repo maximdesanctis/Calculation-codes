@@ -118,26 +118,6 @@ def solution_check(matrix_matrix):
     return True
 
 
-def beta_solution_check(unsolved_matrx, solved_matrx):
-    def solved_value(matrix_matrix, column):
-        matrix_lines = len(matrix_matrix)
-        for line in range(matrix_lines):
-            if int(matrix_matrix[line][column]) == 1:
-                return matrix_matrix[line][-1]
-            else:
-                continue
-
-    for unsolv_line in unsolved_matrx:
-        line_sum = 0
-        for unsolv_column in range(len(unsolv_line) - 1):
-            line_sum += unsolv_line[unsolv_column] * solved_value(solved_matrx, unsolv_column)
-        if line_sum == unsolv_line[-1]:
-            continue
-        else:
-            return False
-    return True
-
-
 def rref(matrix, matrix_lines, matrix_columns):
     finished_matrix = clean(substitute(simplify(eliminate(matrix, matrix_lines, matrix_columns),
                                                 matrix_lines), matrix_lines, matrix_columns))
