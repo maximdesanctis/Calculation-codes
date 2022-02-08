@@ -55,9 +55,12 @@ def main(option, times):
         file = open('/home/maxo/Storage/Computer-Science/Python/venv/values_birthday.txt', 'a')
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
+    else:
+        file = open('Text.txt')
     file.close()
     return time() - starting_time
-    
+
 
 if __name__ == '__main__':
-    print(main(input('What do you want to simulate? '), int(input('How many times do you want to run the simulation? '))))
+    print(
+        main(input('What do you want to simulate? '), int(input('How many times do you want to run the simulation? '))))
