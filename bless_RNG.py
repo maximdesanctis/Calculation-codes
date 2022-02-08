@@ -56,8 +56,8 @@ def main(option, times):
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
     file.close()
-    print(time() - starting_time)
+    return (time() - starting_time)
     
 
 if __name__ == '__main__':
-    main(input('What do you want to simulate? '), int(input('How many times do you want to run the simulation? ')))
+    print(main(input('What do you want to simulate? '), int(input('How many times do you want to run the simulation? '))))
