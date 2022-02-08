@@ -56,7 +56,7 @@ def main(option, times):
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
     file.close()
-    return (time() - starting_time)
+    return time() - starting_time
     
 
 if __name__ == '__main__':
