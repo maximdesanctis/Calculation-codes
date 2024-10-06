@@ -39,20 +39,21 @@ def simulation_birthday(n):
 
 
 def main(option, times):
+    path = input ("Please enter the path… ")
     starting_time = time()
     if option.lower() == 'goose':
         value = simulation_geese(times)
-        file = open('/home/maxo/Storage/Computer-Science/Python/venv/values.txt', 'a')
+        file = open(f'{path}/values.txt', 'a')
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
     if option.lower() == 'maze':
         value = simulation_maze(times)
-        file = open('/home/maxo/Storage/Computer-Science/Python/venv/values_maze.txt', 'a')
+        file = open(f'{path}/values_maze.txt', 'a')
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
     if option.lower() == 'birthday':
         value = simulation_birthday(times)
-        file = open('/home/maxo/Storage/Computer-Science/Python/venv/values_birthday.txt', 'a')
+        file = open(f'{path}/values_birthday.txt', 'a')
         file.write('n = ' + str(times) + '\n')
         file.write(str(value) + '\n')
     else:
